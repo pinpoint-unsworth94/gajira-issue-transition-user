@@ -7,7 +7,7 @@ Returns JIRA user details for user that last transitioned a Jira ticket to a giv
 
 To find an issue key inside commit messages:
 ```yaml
-- name: Find in commit messages
+- name: Find JIRA transition user
   uses: pinpoint-unsworth94/gajira-issue-transition-user@master
   with:
     JIRA_ISSUE_KEY: "JIRA-REF"
