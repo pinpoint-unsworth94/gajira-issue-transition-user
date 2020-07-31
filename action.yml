@@ -1,0 +1,20 @@
+name: Find JIRA transition user
+description: Returns JIRA user details for user that last transitioned a Jira ticket to a given status.
+branding:
+  icon: 'book-open'
+  color: 'blue'
+inputs:
+  JIRA_ISSUE_KEY:
+    description: Jira ticket reference.
+    required: true
+  JIRA_ISSUE_STATUS:
+    description: Jira ticket status.
+    required: true
+outputs:
+  jira_account_id:
+    description: Jira account id.
+  jira_account_name:
+    description: Jira account display name.
+runs:
+  using: 'node12'
+  main: './dist/index.js'

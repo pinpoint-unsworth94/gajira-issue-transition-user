@@ -1,0 +1,31 @@
+on:
+  push
+
+name: Find JIRA transition user
+
+jobs:
+  find-jira-transition-user:
+    name: Find JIRA transition user
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+
+    - name: Login
+      uses: atlassian/gajira-login@master
+      env:
+        JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+        JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
+        JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+
+    - name: Find JIRA transition user
+      id: find
+      uses: ./
+      with:
+        JIRA_ISSUE_KEY: "PD-352"
+        JIRA_ISSUE_STATUS: "PR Provided"
+    - name: Jira Add Comment
+      uses: atlassian/gajira-comment@v2.0.1
+      with:
+        issue: "PD-352"
+        comment: "[~accountid:${{ steps.find.outputs.jira_account_id }}] a test comment from the API."
