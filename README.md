@@ -1,8 +1,5 @@
-# Jira Find Issue Key
-Extract issue key from string
-
-For examples on how to use this, check out the [gajira-demo](https://github.com/atlassian/gajira-demo) repository
-> ##### Only supports Jira Cloud. Does not support Jira Server (hosted)
+# Find JIRA Transition User
+Returns JIRA user details for user that last transitioned a Jira ticket to a given status.
 
 ## Usage
 
@@ -11,9 +8,10 @@ For examples on how to use this, check out the [gajira-demo](https://github.com/
 To find an issue key inside commit messages:
 ```yaml
 - name: Find in commit messages
-  uses: atlassian/gajira-find-issue-key@master
+  uses: pinpoint-unsworth94/gajira-issue-transition-user@master
   with:
-    from: commits
+    JIRA_ISSUE_KEY: "JIRA-REF"
+    JIRA_ISSUE_STATUS: "PR Provided"
 ```
 
 ----
@@ -23,18 +21,20 @@ To find an issue key inside commit messages:
 - None
 
 ### Inputs
-- `description` - Provide jsonpath for the GitHub event to extract issue from
-- `string` - Provide a string to extract issue key from
-- `from` - Find from predefined place (should be either 'branch', or 'commits', default is 'commits')
+- `JIRA_ISSUE_KEY` - Provide Jira ticket reference.
+- `JIRA_ISSUE_STATUS` - Provide Jira ticket status
 
 ### Outputs
-- `issue` - Key of the found issue
+- `jira_account_id` - Jira account id.
+- `jira_account_name` - Jira account display name.
 
 ### Reads fields from config file at $HOME/jira/config.yml
 - None
 
 ### Writes fields to config file at $HOME/jira/config.yml
-- `issue` - a key of a found issue
+- `jira_account_id` - Jira account id.
+- `jira_account_name` - Jira account display name.
 
 ### Writes fields to CLI config file at $HOME/.jira.d/config.yml
-- `issue` - a key of a found issue
+- `jira_account_id` - Jira account id.
+- `jira_account_name` - Jira account display name.
